@@ -1,6 +1,8 @@
 // dada una cadena s, encontrar la longitud de la subcadena más larga sin repetir caracteres
 
 function longestSubstringWithoutRepeatingCharacters(s) {
+  if (s.length === 0) return 0
+
   //two pointers, one stays still, the other moves forward to analyze characters
   let p1 = 0
   let p2
@@ -11,6 +13,7 @@ function longestSubstringWithoutRepeatingCharacters(s) {
 
   // console.log(lettersInSubstring)
   for (let i = 1; i < s.length; i++) {
+    // first, we check if the two current elements are the same, if they are we want to continue with the rest
     if (s[i - 1] !== s[i]) {
       p2 = i
       if (s[i] in lettersInSubstring) {
@@ -25,7 +28,12 @@ function longestSubstringWithoutRepeatingCharacters(s) {
       } else {
         lettersInSubstring[s[i]] = 1
       }
-    } else continue
+    } else {
+      p1 = i
+      lettersInSubstring = {
+        [s[i]]: 1,
+      }
+    }
   }
 
   console.log(lettersInSubstring)
@@ -37,3 +45,5 @@ console.log(
   longestSubstringWithoutRepeatingCharacters('jdkafnlcdsalkxcmpoiuytfccv')
 )
 console.log(longestSubstringWithoutRepeatingCharacters('abcabcbb'))
+console.log(longestSubstringWithoutRepeatingCharacters('pwwkew'))
+console.log(longestSubstringWithoutRepeatingCharacters(''))
